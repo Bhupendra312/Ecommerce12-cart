@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block 'main' %}
+
+<div class="row mt-3 bg-light p-2">
+    <div class="col-md-9"><!--Product & customer detail start-->
+        {% for i in data %}
+        {% if forloop.counter == 1 %}
+        <h4>Customer Details</h4><hr>
+        <div class="row shadow p-3"><!--customer detail start-->
+            <p><strong>Customer Name :</strong>{{i.uid.username}}</p>
+            <p><strong>Customer Email :</strong>{{i.uid.email}}</p>
+        </div><!--customer details end-->
+        {% endif %}
+        {% endfor %}
+        {% for i in data %}
+    
+        <div class="row shadow p-3"><!--product detail start-->
+            <div class="col-md-5">
+                <img src="{{i.pid.pimage.url}}" class="card-img-top" alt="...">
+            </div><!--image section end-->
+            <div class="col-md-7">
+                <p><strong>Product Name: </strong>{{i.pid.name}}</p>
+
+                {% if i.pid.cat == 1 %}
+                    <p><strong>Category : </strong> Mobile</p>
+                {% elif i.pid.cat == 2 %}
+                    <p><strong>Category : </strong> Shoes</p>
+                {% else %}
+                    <p><strong>Category : </strong> Cloth/p>
+                {% endif %}
+                <p><strong>Product Details :</strong>{{i.pid.pdetail}}</p>
+                <p><strong>Price :</strong>{{i.pid.price  }}</p>
+
+                <p><a href="/updateqty/0/{{i.id}}"><button class="btn btn-warning"><strong><b>-</b></strong></button></a>
+                    <input type="text" name="" id="" value="{{i.qty}}">
+                <a href="/updateqty/1/{{i.id}}"><button class="btn btn-warning"><b>+</b></button></a></p>
+                <p><a href="/remove/{{i.id}}"><button class="btn btn-danger">Remove</button></a></p>
+            </div><!--product details end-->
+        </div><!--product detail end-->
+        {% endfor %}
+    </div><!--Product & customer detail end -->
+    <div class="col-md-3 shadow"><!--price dtails start-->
+        <h4>price detail</h4>
+        <p><strong>Price {{n}} Items: </strong>{{total}}</p>
+        <p><strong>Total Amount :</strong>{{total}}</p>
+        <p><a href="/place_order"><button class="btn btn-warning">Place Order</button></a></p>
+    </div><!--price dtails start end-->
+</div>
+
+
+
+
+
+{% endblock 'main' %}

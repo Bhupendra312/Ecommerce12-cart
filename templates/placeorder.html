@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block 'main' %}
+
+<div class="row mt-3 p-2 bg-light"> <!-- 2nd row start or Main section start-->
+    <div class="col-md-9 p-3" ><!-- Product and cutomer section start-->
+        {% for i in data %}
+        {% if forloop.counter == 1 %}
+        <div class="row shadow"><!--cutomer detail section start-->
+            
+            <h4>Customer Details</h4><hr>
+            <p><strong>Customer Name: </strong>{{i.uid.username}}</p> 
+            <p><strong>Customer Email: </strong>{{i.uid.email}}</p>    
+        </div><!--cutomer detail section end-->
+        {% endif %}
+        {% endfor %}
+   
+        {% for i in data %}
+        <div class="row bg-primary-subtle p-3 mt-3 shadow-sm"><!--Order Summery start-->
+            <h4>Order Summary</h4>
+        </div><!--Order Summery end-->
+        <div class="row shadow"><!--product detail section start-->                
+            <div class="col-md-5 py-5">
+                <img src="{{i.pid.pimage.url}}" class="card-img-top" alt="">
+            </div><!-- image section end -->
+            <div class="col-md-7 py-5">
+                <p><strong>Product Name: </strong>{{i.pid.name}}</p>
+                {% if i.pid.cat == 1 %}
+                <p><strong>Category: </strong>Mobile</p>
+                {% elif i.pid.cat == 2 %}
+                <p><strong>Category: </strong>Shoes</p>
+                {% else %}
+                <p><strong>Category: </strong>Cloth</p>
+                {% endif %}
+                <p><strong>Product Detail: </strong>{{i.pid.pdetail}}</p>
+                <p><strong>Price per item: </strong>Rs.{{i.pid.price}}</p>
+                <p><strong>Quntity: </strong>{{i.qty}}</p>
+                <p><strong>Total Amount: </strong>Rs.{{i.amt}}</p>
+
+            </div><!-- product detail end -->                    
+        </div><!--product detail section end--> 
+        {% endfor %}               
+    </div><!-- Product and cutomer section end-->
+    <div class="col-md-3 p-2"><!-- Price detail section start-->
+        <h4>Price Details</h4><hr>
+        <p><strong>Price {{n}} items:</strong>{{total}}</p>
+        <p><strong>Total Amount:</strong>{{total}}</p>
+        <p><a href="/makepayment"><button class="btn btn-danger">Make Payment</button></a></p>
+    </div><!-- Price detail section end-->
+</div><!-- 2nd row end or Main section end-->
+
+
+
+{% endblock 'main' %}
